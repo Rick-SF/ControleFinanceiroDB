@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#121212"
+    tools:context=".MainActivity">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"/>
+
+    <TextView
+        android:id="@+id/TotalGasto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Soma Total: R$0.00"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:id="@+id/Descricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descrição"
+        android:textColor="#2A2727"
+        android:textColorHint="#686868"
+        android:background="@android:drawable/edit_text"
+        android:layout_marginBottom="8sp"/>
+
+    <EditText
+        android:id="@+id/Valor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Valor (ex: 10.50)"
+        android:inputType="numberDecimal"
+        android:textColor="#2A2727"
+        android:textColorHint="#686868"
+        android:background="@android:drawable/edit_text"
+        android:layout_marginBottom="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/BtnAdicionarReceita"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Adicionar Receita"
+            android:backgroundTint="#388E3C"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="4dp"
+            android:textSize="16dp"/>
+
+        <Button
+            android:id="@+id/BtnAdicionarDespesa"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Adicionar Despesa"
+            android:backgroundTint="#E71D41"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="4dp"
+            android:textSize="16dp"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/ListaGastos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="#888888"
+        android:dividerHeight="1dp"
+        android:background="#1E1E1E"
+        android:padding="8dp"
+        android:textAlignment="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/BtnEditar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Editar"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#454545"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginTop="10dp"
+            android:textSize="20dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
