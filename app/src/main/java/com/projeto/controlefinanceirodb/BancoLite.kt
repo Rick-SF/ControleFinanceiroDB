@@ -4,10 +4,9 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import androidx.core.content.contentValuesOf
 
-class BancoLite(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION){
-    companion object{
+class BancoLite(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+    companion object {
         private const val DATABASE_NAME = "financeiro.db"
         private const val DATABASE_VERSION = 1
         const val TABLE_GASTOS = "gastos"
@@ -31,7 +30,8 @@ class BancoLite(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         onCreate(db)
     }
 
-    fun adicionarGastos (tipo: String, descricao: String, valor: Double){
+    // Create
+    fun adicionarGastos(tipo: String, descricao: String, valor: Double) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_TIPO, tipo)
@@ -42,25 +42,58 @@ class BancoLite(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, nul
         db.close()
     }
 
-    fun buscarGastos(): List<String> {
-        val lista = mutableListOf<String>()
+    // Read
+    fun buscarGastos(): List<Gasto> {
+        val listaGastos = mutableListOf<Gasto>()            // Lista para armazenar objetos Gasto
         val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM $TABLE_GASTOS", null)
 
-        if (cursor.moveToFirst()){
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_GASTOS ORDER BY $COLUMN_ID DESC", null) // Adicionado ORDER BY para consistência
+
+        if (cursor.moveToFirst()) {
             do {
+                val id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID))
                 val tipo = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIPO))
                 val descricao = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DESCRICAO))
                 val valor = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_VALOR))
-                val item = "$tipo: $descricao - R$%.2f".format(valor)
-                lista.add(item)
+
+                val gasto = Gasto(id, tipo, descricao, valor)
+                listaGastos.add(gasto)
             } while (cursor.moveToNext())
         }
-
         cursor.close()
         db.close()
-        return lista
+        return listaGastos // Retorna a lista de objetos Gasto
     }
 
+    // Update
+    fun atualizarGastos(id: Int, novoTipo: String, novaDescricao: String, novoValor: Double): Int {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_TIPO, novoTipo)
+            put(COLUMN_DESCRICAO, novaDescricao)
+            put(COLUMN_VALOR, novoValor)
+        }
 
+        val selection = "$COLUMN_ID = ?"
+        val selectionArgs = arrayOf(id.toString())
+
+        val count = db.update(TABLE_GASTOS, values, selection, selectionArgs)
+        db.close()
+        return count            // num de linhas afetadas
+    }
+
+    // Delete
+    fun deletarGastos(id: Int): Int {
+        val db = this.writableDatabase
+        val selection = "$COLUMN_ID = ?"
+        val selectionArgs = arrayOf(id.toString())
+
+        val count = db.delete(
+            TABLE_GASTOS,
+            selection,
+            selectionArgs
+        )
+        db.close()
+        return count            // num de linhas afetadas
+    }
 }

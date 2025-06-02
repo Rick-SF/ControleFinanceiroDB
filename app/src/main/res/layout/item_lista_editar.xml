@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="#1E1E1E"
-    android:padding="8dp">
+    android:padding="10dp"
+    android:gravity="center_vertical"
+    android:background="#2C2C2C">
 
     <TextView
-        android:id="@+id/textItem"
+        android:id="@+id/textItemDetalhes_editar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Item"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"/>
+        android:textColor="#E0E0E0"
+        android:textSize="15sp"
+        android:text="Tipo: Descrição - R$Valor"/>
 
     <Button
-        android:id="@+id/BtnApagar"
+        android:id="@+id/btnEditarItem_editar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Excluir"
-        android:textSize="15sp"
-        android:backgroundTint="#E71D41"
-        android:textColor="#FFFFFF"/>
+        android:layout_height="40dp"
+        style="?android:attr/buttonBarButtonStyle"
+        android:text="Editar"
+        android:textAllCaps="false"
+        android:textSize="13sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#03A9F4"
+        android:layout_marginStart="8dp"/>
 
+    <Button
+        android:id="@+id/btnApagarItem_editar"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        style="?android:attr/buttonBarButtonStyle"
+        android:text="Apagar"
+        android:textAllCaps="false"
+        android:textSize="13sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#F44336"
+        android:layout_marginStart="8dp"/>
 </LinearLayout>
